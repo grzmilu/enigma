@@ -1,43 +1,40 @@
 
-public class Cipher {
+public abstract class Cipher {
 
-    int offset = 1;
-    String alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    protected int key = 1;
+    protected Alphabet alphabet;
 
-    String encrypt(String s) {
-
-
-        StringBuilder ss = new StringBuilder();
-        if (s.matches("^[A-Z]+$")) {
-            for (int i = 0; i < s.length(); i++) {
-                int ch = s.charAt(i);
-
-                ch = ch + offset - 65;
-                ch = ch % 26;
-                ch = ch + 65;
-
-                ss.append((char) ch);
-
-            }
-            s = ss.toString();
-        } else {
-            throw new IllegalArgumentException("Źle");
-        }
-        return s;
+    public Cipher(Alphabet a) {
+        alphabet = a;
     }
+    //String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    String encrypt2(String s) {
+    /*
+     * String encrypt(String s) { StringBuilder ss = new StringBuilder(); if
+     * (s.matches("^[A-Z]+$")) { for (int i = 0; i < s.length(); i++) { int ch =
+     * s.charAt(i);
+     *
+     * ch = ch + key - 65; ch = ch % 26; ch = ch + 65;
+     *
+     * ss.append((char) ch); } s = ss.toString(); } else { throw new
+     * IllegalArgumentException("Źle"); } return s; }
+     */
+    public abstract String encrypt(String s);
+
+    public abstract String decrypt(String s);
+
+    String doJob(String s, CharProc cp) {
         StringBuilder ss = new StringBuilder();
         char c;
         int l;
         for (int i = 0; i < s.length(); i++) {
             c = s.charAt(i);
-            l = alfabet.indexOf(c);                      
-            l = (l + offset) % alfabet.length();
-            c = alfabet.charAt(l);
+            c = cp.process(c, key, alphabet);
+
+            //     l = alphabet.indexOf(c);
+            //      l = (l + key) % alphabet.length();
+            //    c = alphabet.charAt(l);
             ss.append(c);
-
-
         }
         s = ss.toString();
 
@@ -45,10 +42,10 @@ public class Cipher {
     }
 
     public void setOffset(int y) {
-        offset = y;
+        key = y;
     }
 
     public int getOffset() {
-        return offset;
+        return key;
     }
 }

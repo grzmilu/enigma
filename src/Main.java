@@ -1,13 +1,10 @@
-
 public class Main {
 
+    
     public static void main(String[] args) {
-
-        
-        Cipher a=new Cipher();
-       
-       System.out.println(a.encrypt2("ABCZ"));
-       a.setOffset(-4);
-       System.out.println(a.encrypt2("BCDA"));
+     Alphabet a=new Alphabet(Alphabet.CharSet.DIGITS);
+     Cipher b=new CipherCezar(a);
+     System.out.println(b.encrypt("01239"));
+     System.out.println(b.decrypt("01239"));
     }
 }
