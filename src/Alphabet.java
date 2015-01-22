@@ -1,7 +1,7 @@
 public class Alphabet {
 
     String alphabet;
-    public static final String ALPHA=" ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //public static final String ALPHA=" ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     public Alphabet(String alphabet) {
         this.alphabet = alphabet;
@@ -30,6 +30,7 @@ this(charset.getChars());
     }
 
    public enum CharSet{
+       
     DIGITS("0123456789");  
        private String chars="";
         CharSet(String chars){

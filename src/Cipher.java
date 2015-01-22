@@ -1,7 +1,7 @@
 
-public abstract class Cipher {
+public abstract class Cipher<T> {
 
-    protected int key = 1;
+    protected T key;
     protected Alphabet alphabet;
 
     public Cipher(Alphabet a) {
@@ -26,7 +26,7 @@ public abstract class Cipher {
     String doJob(String s, CharProc cp) {
         StringBuilder ss = new StringBuilder();
         char c;
-        int l;
+        //int l;
         for (int i = 0; i < s.length(); i++) {
             c = s.charAt(i);
             c = cp.process(c, key, alphabet);
@@ -41,11 +41,12 @@ public abstract class Cipher {
         return s;
     }
 
-    public void setOffset(int y) {
+    public void setOffset(T y) {
         key = y;
     }
 
-    public int getOffset() {
+    public T getOffset() {
         return key;
     }
+    public abstract T generateAndSetKey();
 }
